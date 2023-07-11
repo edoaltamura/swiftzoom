@@ -1,4 +1,4 @@
-`SWIFTzoom`
+SWIFTzoom
 ==========
 
 [![Documentation Status](https://readthedocs.org/projects/swiftzoom/badge/?version=latest)](https://swiftzoom.readthedocs.io/en/latest/?badge=latest)
