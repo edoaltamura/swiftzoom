@@ -31,7 +31,6 @@ setuptools.setup(
       "unyt",
       "scipy",
       "matplotlib",
-      "joblib,
       "attrs",
       "pytest",
       "black",
