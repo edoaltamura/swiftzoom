@@ -2,10 +2,11 @@
 ==========
 
 [![Documentation Status](https://readthedocs.org/projects/swiftzoom/badge/?version=latest)](https://swiftzoom.readthedocs.io/en/latest/?badge=latest)
-## A `Python 3` library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with `SWIFT`.
+
+A `Python 3` library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with `SWIFT`.
 
 
-Full documentation is available at [ReadTheDocs](http://swiftzoom.readthedocs.org).
+Detailed documentation is available at the [ReadTheDocs](http://swiftzoom.readthedocs.org) repository.
 
 Requirements
 ------------
