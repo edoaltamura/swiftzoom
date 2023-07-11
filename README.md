@@ -3,7 +3,8 @@ SWIFTzoom
 
 [![Documentation Status](https://readthedocs.org/projects/swiftzoom/badge/?version=latest)](https://swiftzoom.readthedocs.io/en/latest/?badge=latest)
 
-A `Python 3` library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with `SWIFT`.
+A Python 3 library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with [SWIFT](http://swift.dur.ac.uk), a parallel, 
+multi-purpose numerical simulation software for hydrodynamic simulations in astrophysics and cosmology.
 
 
 Detailed documentation is available at the [ReadTheDocs](http://swiftzoom.readthedocs.org) repository.
@@ -23,6 +24,6 @@ issues.
 Installing
 ----------
 
-YOu can install `swiftzoom` using the Python packaging manager `pip` or any other packaging manager that you prefer:
+You can install `swiftzoom` using the Python packaging manager `pip` or any other packaging manager that you prefer:
 
 `pip install swiftzoom`
