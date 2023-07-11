@@ -1,0 +1,11 @@
+numpy
+unyt
+scipy
+matplotlib
+joblib
+attrs
+pytest
+black
+tqdm
+velociraptor
+swiftsimio
