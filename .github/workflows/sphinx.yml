@@ -10,3 +10,5 @@ jobs:
     - uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
+        pre-build-command: "sphinx-quickstart"
+        build-command: "sphinx-build -b html ../swiftzoom build && make html"
