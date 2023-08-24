@@ -1,3 +1,5 @@
+
+
 ![SWIFTzoom Logo Banner - Dark](https://github.com/edoaltamura/swiftzoom/blob/main/.github/workflows/swzoom-banner-dark.SVG#gh-dark-mode-only)
 ![SWIFTzoom Logo Banner - Light](https://github.com/edoaltamura/swiftzoom/blob/main/.github/workflows/swzoom-banner-light.SVG#gh-light-mode-only)
 
