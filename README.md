@@ -22,7 +22,7 @@ Complete documentation is available at the [ReadTheDocs](http://swiftzoom.readth
 Installing
 ----------
 
-You can install `swiftzoom` using the Python packaging manager `pip` or any other packaging manager that you prefer:
+You can install SWIFTzoom using the Python packaging manager `pip` by typing:
 
 `pip install swiftzoom`
 
@@ -36,12 +36,9 @@ Main features
 
 Requirements
 ------------
-This package requires `python` `v3.9.0` or higher. Lower versions are not tested and may present compatibility 
-issues.
+This package requires `python` `v3.7.0` or higher. Lower versions are not tested and may present compatibility issues.
 
 ### Python packages
-
-
 + `numpy`, required for the core numerical routines.
 + `swiftsimio`, required to read data from the SWIFT HDF5 output files efficiently.
 + `unyt`, required for symbolic unit calculations (depends on `sympy`).
