@@ -29,7 +29,7 @@ You can install SWIFTzoom using the Python packaging manager `pip` by typing:
 Main features
 ------------
 - **Project template**. A standard, intuitive and repeatable structure for data science pipelines for simulation-based projects. This feature is inspired by [Cookiecutter Data Science](https://github.com/drivendata/cookiecutter-data-science/) and [Kedro](https://github.com/kedro-org/kedro), the data science tool developed by [QuantumBlack, AI by McKinsey](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients).
-- *Snapshot-catalogue binding*. Combines the efficiency of [swiftsimio](https://github.com/SWIFTSIM/swiftsimio) and [swiftgalaxy](https://github.com/SWIFTSIM/swiftgalaxy) with halo-catalogue information from [velociraptor](https://github.com/SWIFTSIM/velociraptor-python) to accelerate the analysis of single objects.
+- **Snapshot-catalogue binding**. Combines the efficiency of [swiftsimio](https://github.com/SWIFTSIM/swiftsimio) and [swiftgalaxy](https://github.com/SWIFTSIM/swiftgalaxy) with halo-catalogue information from [velociraptor](https://github.com/SWIFTSIM/velociraptor-python) to accelerate the analysis of single objects.
 - **Radial profiles**. A sub-module to compute radial distribution profiles of widely-used quantities (e.g. density, temperature, pressure, entropy) and a template for defining custom profiles.
 - **Lagrangian tracking**. A tool for tracking an ensemble of particles backwards and forwards in time from a given snapshot by matching unique particle IDs.
 - **Map visualisation**. A high-level easy-to-use abstraction of the [swiftsimio](https://github.com/SWIFTSIM/swiftsimio) visualisation submodule to produce maps of the particles in the simulation. 
