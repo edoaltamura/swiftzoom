@@ -1,5 +1,5 @@
-SWIFTzoom
-==========
+![SWIFTzoom Logo Banner - Dark](https://github.com/edoaltamura/swiftzoom/blob/main/.github/workflows/swzoom-banner-dark.SVG#gh-dark-mode-only)
+![SWIFTzoom Logo Banner - Light](https://github.com/edoaltamura/swiftzoom/blob/main/.github/workflows/swzoom-banner-light.SVG#gh-light-mode-only)
 
 [![Python version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue.svg)](https://pypi.org/project/swiftzoom/)
 [![PyPI version](https://badge.fury.io/py/swiftzoom.svg)](https://pypi.org/project/swiftzoom/)
