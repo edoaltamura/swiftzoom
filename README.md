@@ -16,6 +16,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/edoaltamura/swiftzoom)
 
 
+
 A Python library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with [SWIFT](http://swift.dur.ac.uk), a parallel, 
 multi-purpose numerical simulation software for hydrodynamic simulations in astrophysics and cosmology.
 
