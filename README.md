@@ -13,6 +13,7 @@
 [![Documentation](https://readthedocs.org/projects/swiftzoom/badge/?version=latest)](https://swiftzoom.readthedocs.io/en/latest/?badge=latest)
 [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/7769/badge)](https://www.bestpractices.dev/projects/7769)
 ![GitHub repo size](https://img.shields.io/github/repo-size/edoaltamura/swiftzoom)
+![GitHub contributors](https://img.shields.io/github/contributors/edoaltamura/swiftzoom)
 
 
 A Python library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with [SWIFT](http://swift.dur.ac.uk), a parallel, 
