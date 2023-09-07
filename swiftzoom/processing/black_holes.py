@@ -3,7 +3,7 @@ import unyt
 from swiftsimio import cosmo_array
 from dataclasses import dataclass
 
-from loader import GroupZoom
+from ..loading import GroupZoom
 from .helper_functions import numpy_to_cosmo_array
 
 black_hole_fields = [

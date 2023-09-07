@@ -9,3 +9,9 @@ black
 tqdm
 velociraptor
 swiftsimio
+swiftgalaxy
+pandas
+
+sphinx
+sphinx_rtd_theme
+recommonmark

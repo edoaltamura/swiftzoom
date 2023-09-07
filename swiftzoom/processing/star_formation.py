@@ -3,7 +3,7 @@ import unyt
 from astropy.units import Gyr as astropy_Gyr
 from astropy.cosmology import z_at_value
 
-from loader import GroupZoom
+from ..loading import GroupZoom
 from .helper_functions import numpy_to_cosmo_array
 
 

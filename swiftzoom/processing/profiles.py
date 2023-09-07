@@ -5,9 +5,9 @@ from typing import Optional
 from scipy.interpolate import interp1d, RegularGridInterpolator
 from scipy.spatial.transform import Rotation
 
-from loader import GroupZoom
+from ..loading import GroupZoom
 
-from .xray_cloudy import interpolate_X_Ray
+# from .xray_cloudy import interpolate_X_Ray
 from .helper_functions import astropy_to_unyt, histogram_unyt, cumsum_unyt, numpy_to_cosmo_array
 from .electron_number_density import get_electron_number_density, get_electron_weighted_gas_mass
 from .spherical_overdensities import SphericalOverdensities
@@ -615,6 +615,8 @@ class XrayEmissivityProfile(GasMassProfile):
         self.xray_luminosity_profile = xray_luminosity_profile
         
     def compute_emissivities(self):
+
+        raise NotImplementedError
         
         self.group_zoom.gas.densities.convert_to_physical()
         

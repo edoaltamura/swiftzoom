@@ -2,7 +2,7 @@ import numpy as np
 from scipy.interpolate import interp1d
 import unyt
 
-from loader import GroupZoom
+from ..loading import GroupZoom
 from .helper_functions import astropy_to_unyt, histogram_unyt, cumsum_unyt, numpy_to_cosmo_array
 
 class SphericalOverdensities:

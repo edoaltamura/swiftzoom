@@ -4,8 +4,8 @@ import unyt
 import numpy as np
 from swiftsimio import cosmo_array, objects
 
-from loader import GroupZoom
-from loader.constants import mean_molecular_weight, mean_atomic_weight_per_free_electron
+from ..loading import GroupZoom
+from ..loading.constants import mean_molecular_weight, mean_atomic_weight_per_free_electron
 
 from .helper_functions import astropy_to_unyt, numpy_to_cosmo_array, cosmo_to_unyt_array
 from .spherical_overdensities import SphericalOverdensities
