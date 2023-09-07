@@ -1,5 +1,5 @@
 # Builds
-build/*
+build/doctrees/*
 
 # Automatically generated files from APIDoc
 source/modules/swifzoom*.rst
