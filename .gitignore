@@ -69,7 +69,11 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+# Builds
+docs/build/doctrees/
+
+# Automatically generated files from APIDoc
+docs/source/modules/swifzoom*.rst
 
 # PyBuilder
 .pybuilder/
