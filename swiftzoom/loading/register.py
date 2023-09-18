@@ -1,12 +1,21 @@
-"""
+# -*- coding: utf-8 -*-
+"""This Python code defines a class called GroupZoom that represents a zoom-in region of a simulated group or
+cluster in a cosmological simulation.
+
+Initialization based on Redshift or Snapshot Number: The GroupZoom class can be initialized using either the desired
+redshift or the specific snapshot number. It inherits functionality from the SWIFTGalaxy class in the swiftgalaxy
+library.
+
 This file contains the `GroupZoom` object which:
 
 + represents a zoom-in region of a simulated group or cluster, initialized based on redshift or snapshot number
+
 + inherits the `SWIFTGalaxy` class from the `swiftgalaxy` library
+
 + if gas temperature is not included in the SWIFT snapshot, you can generate it using the method `obj.set_temperatures_from_internal_energies()`
+
 + a simple spherical aperture selection can be operated using the method `obj.get_mask_3d_radius_r500()`
 """
-
 import re
 import warnings
 from typing import Optional, Dict
@@ -57,28 +66,26 @@ class GroupZoom(SWIFTGalaxy):
 
         Methods:
             set_temperatures_from_internal_energies(self): Set gas temperatures from internal energies if not included.
-            get_mask_gas_temperature(self, tmin: unyt_quantity = 1.e5 * K, tmax: unyt_quantity = 1.e15 * K) -> np.ndarray:
+            get_mask_gas_temperature(self, tmin: unyt_quantity = 1.e5 * K, tmax: unyt_quantity = 1.e15 * K) -> np.array:
                 Get a mask for gas particles based on temperature range.
-            get_mask_3d_radius_r500(self, rmin: float = 0., rmax: float = 5.) -> Dict[str, np.ndarray]:
+            get_mask_3d_radius_r500(self, rmin: float = 0., rmax: float = 5.) -> Dict[str, np.array]:
                 Get masks for different particle types based on their 3D radius in units of r500.
 
-        Examples:
-        ```
-        # Initialize a GroupZoom instance with a specific redshift.
-        group_zoom = GroupZoom('/path/to/simulation/group', redshift=0.5)
+        Example:
+            # Initialize a GroupZoom instance with a specific redshift.
+            group_zoom = GroupZoom('/path/to/simulation/group', redshift=0.5)
 
-        # Initialize a GroupZoom instance with a specific snapshot number.
-        group_zoom = GroupZoom('/path/to/simulation/group', snapshot_number=10)
+            # Initialize a GroupZoom instance with a specific snapshot number.
+            group_zoom = GroupZoom('/path/to/simulation/group', snapshot_number=10)
 
-        # Set gas temperatures from internal energies.
-        group_zoom.set_temperatures_from_internal_energies()
+            # Set gas temperatures from internal energies.
+            group_zoom.set_temperatures_from_internal_energies()
 
-        # Get a mask for gas particles within a temperature range.
-        gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
+            # Get a mask for gas particles within a temperature range.
+            gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
 
-        # Get masks for different particle types based on their 3D radius.
-        radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.2, rmax=1.0)
-        ```
+            # Get masks for different particle types based on their 3D radius.
+            radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.2, rmax=1.0)
         """
 
         self.run_directory = run_directory
@@ -123,19 +130,18 @@ class GroupZoom(SWIFTGalaxy):
         """
         Calculate and set gas temperatures from internal energies if not already included.
 
-        This method calculates the gas temperatures based on internal energies and sets the 'temperatures' attribute for gas particles.
+        This method calculates the gas temperatures based on internal energies and sets the 'temperatures' attribute
+        for gas particles.
 
         Returns:
             None
 
-        Examples:
-        ```
-        # Initialize a GroupZoom instance.
-        group_zoom = GroupZoom('/path/to/simulation/group')
+        Example:
+            # Initialize a GroupZoom instance.
+            group_zoom = GroupZoom('/path/to/simulation/group')
 
-        # Set gas temperatures from internal energies.
-        group_zoom.set_temperatures_from_internal_energies()
-        ```
+            # Set gas temperatures from internal energies.
+            group_zoom.set_temperatures_from_internal_energies()
         """
         self.gas.internal_energies.convert_to_physical()
         setattr(
@@ -157,14 +163,12 @@ class GroupZoom(SWIFTGalaxy):
         Returns:
             np.ndarray: An array of indices representing gas particles within the specified temperature range.
 
-        Examples:
-        ```
-        # Initialize a GroupZoom instance.
-        group_zoom = GroupZoom('/path/to/simulation/group')
+        Example:
+            # Initialize a GroupZoom instance.
+            group_zoom = GroupZoom('/path/to/simulation/group')
 
-        # Get a mask for gas particles within a temperature range.
-        gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
-        ```
+            # Get a mask for gas particles within a temperature range.
+            gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
         """
         return np.where((self.gas.temperatures > tmin) & (self.gas.temperatures < tmax))[0]
 
@@ -180,13 +184,11 @@ class GroupZoom(SWIFTGalaxy):
             Dict[str, np.ndarray]: A dictionary containing masks for different particle types.
 
         Example:
-        ```
-        # Initialize a GroupZoom instance.
-        group_zoom = GroupZoom('/path/to/simulation/group')
+            # Initialize a GroupZoom instance.
+            group_zoom = GroupZoom('/path/to/simulation/group')
 
-        # Get masks for different particle types based on their 3D radius.
-        radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.15, rmax=0.5)
-        ```
+            # Get masks for different particle types based on their 3D radius.
+            radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.15, rmax=0.5)
         """
         radial_mask = {}
 

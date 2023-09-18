@@ -1,3 +1,17 @@
+# -*- coding: utf-8 -*-
+"""This Python code defines a class called `OutputList` that is designed to manage lists of simulation output data and
+assist in locating files associated with specific snapshots or redshifts. The code includes methods to match a given
+redshift with the closest one in the output list, as well as to retrieve file paths for specific snapshot numbers or
+redshifts. It also provides options to include additional information in the returned file paths, such as snapshot
+numbers and nearest redshifts.
+
+The class reads and processes simulation output lists stored in a specified directory, extracting snapshot
+information such as names and redshift values. This information is then used to facilitate data retrieval and
+analysis for specific snapshots or redshifts within the simulation data.
+
+Overall, this code helps streamline the management of simulation output data and simplifies the process of accessing
+relevant files for further analysis or visualization.
+"""
 import os
 import numpy as np
 import pandas as pd
