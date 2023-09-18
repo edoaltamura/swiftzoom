@@ -28,36 +28,35 @@ try:
 except ModuleNotFoundError:
     import pickle
 
-
 default_output_directory = '/cosma/home/dp004/dc-alta2/shocks_analysis/data/02_interim'
 
 
-def sizeof_fmt(num, suffix="B"):
-    
+def sizeof_fmt(num: float, suffix: str = "B") -> str:
     for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
-        
-        if abs(num) < 1024.0:
+
+        if abs(num) < 1024.:
             return "%3.1f%s%s" % (num, unit, suffix)
-        
+
         num /= 1024.0
-        
+
     return "%.1f%s%s" % (num, "Yi", suffix)
 
 
-class CustomPickler:
-    def __init__(self, filename: str, relative_path: bool = True):
+class CustomPickler(object):
+
+    def __init__(self, filename: str, relative_path: bool = True) -> None:
 
         if relative_path:
             self.filename = os.path.join(default_output_directory, filename)
-            
+
         else:
             self.filename = filename
 
     def large_file_warning(self) -> None:
-        
+
         file_size_b = os.path.getsize(self.filename)
-        
-        if not xlargs.quiet and file_size_b > 524288000:
+
+        if file_size_b > 524288000:
             warn(
                 (
                     "[io] Detected file larger than 500 MB! "
@@ -72,17 +71,16 @@ class CustomPickler:
 
 
 class SingleObjPickler(CustomPickler):
-    
-    def __init__(self, *args, **kwargs):
+
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
     def dump_to_pickle(self, obj):
         with open(self.filename, "wb") as output:  # Overwrites any existing file.
             pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
 
-        if not xlargs.quiet:
-            file_size = sizeof_fmt(os.path.getsize(self.filename))
-            print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
+        file_size = sizeof_fmt(os.path.getsize(self.filename))
+        print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
 
     def load_from_pickle(self):
         self.large_file_warning()
@@ -102,18 +100,16 @@ class MultiObjPickler(CustomPickler):
             for obj in obj_collection:
                 pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
 
-        if xlargs.debug:
-            file_size = sizeof_fmt(os.path.getsize(self.filename))
-            print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
+        file_size = sizeof_fmt(os.path.getsize(self.filename))
+        print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
 
     def get_pickle_generator(self):
         """Unpickle a file of pickled data."""
         if not os.path.isfile(self.filename):
             raise FileNotFoundError(f"File {self.filename} not found.")
 
-        if xlargs.debug:
-            file_size = sizeof_fmt(os.path.getsize(self.filename))
-            print(f"[io] Loading from pkl [{file_size:s}]: {self.filename:s}...")
+        file_size = sizeof_fmt(os.path.getsize(self.filename))
+        print(f"[io] Loading from pkl [{file_size:s}]: {self.filename:s}...")
 
         with open(self.filename, "rb") as f:
             while True:
@@ -131,7 +127,7 @@ class MultiObjPickler(CustomPickler):
 
 
 class DataframePickler(CustomPickler):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
     def dump_to_pickle(self, obj: DataFrame):
@@ -147,18 +143,18 @@ class DataframePickler(CustomPickler):
             mode="w",
         )
 
-        if xlargs.debug:
-            file_size = sizeof_fmt(os.path.getsize(self.filename))
-            print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
+        file_size = sizeof_fmt(os.path.getsize(self.filename))
+        print(f"[io] Object saved to pkl [{file_size:s}]: {self.filename:s}")
 
     def load_from_pickle(self):
         self.large_file_warning()
 
         return read_pickle(self.filename)
 
+
 class Dict2HDF(CustomPickler):
-    
-    def __init__(self, *args, **kwargs):
+
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
     def save_dict_to_hdf5(self, dictionary: dict, mode: str = "w"):
@@ -188,17 +184,17 @@ class Dict2HDF(CustomPickler):
             None
         """
         for key, item in dic.items():
-            
+
             if isinstance(item, (np.ndarray, int, float, str, bytes)):
-                
+
                 try:
                     h5file[path + key] = item
                 except:
                     print(f'Could not save <{path + key:s}> of type <{type(item):s}>')
-                
+
             elif isinstance(item, dict):
                 self._recursively_save_dict_contents_to_group(h5file, path + key + "/", item)
-                
+
             else:
                 raise ValueError(f"Cannot save {type(item):s} type")
 
@@ -224,12 +220,12 @@ class Dict2HDF(CustomPickler):
             ans (dict): a nested python dictionary containing the contents of the hdf5 group.
         """
         ans = {}
-        
+
         for key, item in h5file[path].items():
-            
+
             if isinstance(item, h5py._hl.dataset.Dataset):
                 ans[key] = item[...]
-                
+
             elif isinstance(item, h5py._hl.group.Group):
                 ans[key] = self._recursively_load_dict_contents_from_group(h5file, path + key + "/")
         return ans
