@@ -1,3 +1,12 @@
+"""
+This file contains the `GroupZoom` object which:
+
++ represents a zoom-in region of a simulated group or cluster, initialized based on redshift or snapshot number
++ inherits the `SWIFTGalaxy` class from the `swiftgalaxy` library
++ if gas temperature is not included in the SWIFT snapshot, you can generate it using the method `obj.set_temperatures_from_internal_energies()`
++ a simple spherical aperture selection can be operated using the method `obj.get_mask_3d_radius_r500()`
+"""
+
 import re
 import warnings
 from typing import Optional, Dict
@@ -16,46 +25,8 @@ get_config().default_file_mode = 'r'
 
 class GroupZoom(SWIFTGalaxy):
     """
-    A class representing a zoom-in region of a simulation group, initialized based on redshift or snapshot number.
-
-    Args:
-        run_directory (str): The path to the simulation group's directory.
-        redshift (Optional[float], optional): The desired redshift. Defaults to None.
-        snapshot_number (Optional[int], optional): The snapshot number. Defaults to None.
-        halo_index (Optional[int], optional): The index of the halo to focus on. Defaults to 0.
-        auto_recentre (Optional[bool], optional): Whether to automatically recenter the region. Defaults to True.
-        import_all_particles (Optional[bool], optional): Whether to import all particles in the box.
-            Defaults to False.
-
-    Attributes:
-        run_directory (str): The path to the simulation group's directory.
-        out_list (OutputList): An instance of OutputList for managing simulation outputs.
-        import_all_particles (bool): Flag indicating whether to import all particles in the box.
-
-    Methods:
-        set_temperatures_from_internal_energies(self): Set gas temperatures from internal energies if not included.
-        get_mask_gas_temperature(self, tmin: unyt_quantity = 1.e5 * K, tmax: unyt_quantity = 1.e15 * K) -> np.ndarray:
-            Get a mask for gas particles based on temperature range.
-        get_mask_3d_radius_r500(self, rmin: float = 0., rmax: float = 5.) -> Dict[str, np.ndarray]:
-            Get masks for different particle types based on their 3D radius in units of r500.
-
-    Example Usage:
-    ```
-    # Initialize a GroupZoom instance with a specific redshift.
-    group_zoom = GroupZoom('/path/to/simulation/group', redshift=0.5)
-
-    # Initialize a GroupZoom instance with a specific snapshot number.
-    group_zoom = GroupZoom('/path/to/simulation/group', snapshot_number=10)
-
-    # Set gas temperatures from internal energies.
-    group_zoom.set_temperatures_from_internal_energies()
-
-    # Get a mask for gas particles within a temperature range.
-    gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
-
-    # Get masks for different particle types based on their 3D radius.
-    radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.2, rmax=1.0)
-    ```
+    A class representing a zoom-in region of a simulated group or cluster, initialized based on redshift or snapshot
+    number.
     """
 
     def __init__(
@@ -70,15 +41,44 @@ class GroupZoom(SWIFTGalaxy):
         """
         Initialize a GroupZoom instance.
 
-        Args:
+        Parameters:
             run_directory (str): The path to the simulation group's directory.
             redshift (Optional[float], optional): The desired redshift. Defaults to None.
             snapshot_number (Optional[int], optional): The snapshot number. Defaults to None.
             halo_index (Optional[int], optional): The index of the halo to focus on. Defaults to 0.
-            auto_recentre (Optional[bool], optional): Whether to automatically recenter the region.
-                Defaults to True.
+            auto_recentre (Optional[bool], optional): Whether to automatically recenter the region. Defaults to True.
             import_all_particles (Optional[bool], optional): Whether to import all particles in the box.
                 Defaults to False.
+
+        Attributes:
+            run_directory (str): The path to the simulation group's directory.
+            out_list (OutputList): An instance of OutputList for managing simulation outputs.
+            import_all_particles (bool): Flag indicating whether to import all particles in the box.
+
+        Methods:
+            set_temperatures_from_internal_energies(self): Set gas temperatures from internal energies if not included.
+            get_mask_gas_temperature(self, tmin: unyt_quantity = 1.e5 * K, tmax: unyt_quantity = 1.e15 * K) -> np.ndarray:
+                Get a mask for gas particles based on temperature range.
+            get_mask_3d_radius_r500(self, rmin: float = 0., rmax: float = 5.) -> Dict[str, np.ndarray]:
+                Get masks for different particle types based on their 3D radius in units of r500.
+
+        Examples:
+        ```
+        # Initialize a GroupZoom instance with a specific redshift.
+        group_zoom = GroupZoom('/path/to/simulation/group', redshift=0.5)
+
+        # Initialize a GroupZoom instance with a specific snapshot number.
+        group_zoom = GroupZoom('/path/to/simulation/group', snapshot_number=10)
+
+        # Set gas temperatures from internal energies.
+        group_zoom.set_temperatures_from_internal_energies()
+
+        # Get a mask for gas particles within a temperature range.
+        gas_temperature_mask = group_zoom.get_mask_gas_temperature(tmin=1.e5 * K, tmax=1.e7 * K)
+
+        # Get masks for different particle types based on their 3D radius.
+        radius_masks = group_zoom.get_mask_3d_radius_r500(rmin=0.2, rmax=1.0)
+        ```
         """
 
         self.run_directory = run_directory
@@ -128,7 +128,7 @@ class GroupZoom(SWIFTGalaxy):
         Returns:
             None
 
-        Example Usage:
+        Examples:
         ```
         # Initialize a GroupZoom instance.
         group_zoom = GroupZoom('/path/to/simulation/group')
@@ -150,14 +150,14 @@ class GroupZoom(SWIFTGalaxy):
         """
         Get a mask for gas particles based on temperature range.
 
-        Args:
+        Parameters:
             tmin (unyt_quantity, optional): The minimum temperature in Kelvin. Defaults to 1.e5 * K.
             tmax (unyt_quantity, optional): The maximum temperature in Kelvin. Defaults to 1.e15 * K.
 
         Returns:
             np.ndarray: An array of indices representing gas particles within the specified temperature range.
 
-        Example Usage:
+        Examples:
         ```
         # Initialize a GroupZoom instance.
         group_zoom = GroupZoom('/path/to/simulation/group')
@@ -172,14 +172,14 @@ class GroupZoom(SWIFTGalaxy):
         """
         Get masks for different particle types based on their 3D radius in units of r500.
 
-        Args:
+        Parameters:
             rmin (float, optional): The minimum scaled radius (in units of r500). Defaults to 0.
             rmax (float, optional): The maximum scaled radius (in units of r500). Defaults to 6.
 
         Returns:
             Dict[str, np.ndarray]: A dictionary containing masks for different particle types.
 
-        Example Usage:
+        Example:
         ```
         # Initialize a GroupZoom instance.
         group_zoom = GroupZoom('/path/to/simulation/group')
