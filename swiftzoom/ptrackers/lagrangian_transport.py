@@ -4,11 +4,11 @@ import unyt
 import numpy as np
 from swiftsimio import objects
 
-from ..loading import GroupZoom
-from ..loading.constants import mean_molecular_weight, mean_atomic_weight_per_free_electron
+from swiftzoom.loading import GroupZoom
+from swiftzoom.loading.constants import mean_molecular_weight, mean_atomic_weight_per_free_electron
 
-from .helper_functions import astropy_to_unyt, numpy_to_cosmo_array
-from .spherical_overdensities import SphericalOverdensities
+from swiftzoom.properties.helper_functions import astropy_to_unyt, numpy_to_cosmo_array
+from swiftzoom.properties.spherical_overdensities import SphericalOverdensities
 from swiftzoom.profiles.electron_number_density import get_electron_number_density
 
 
