@@ -39,11 +39,12 @@ Main features
 
 Requirements
 ------------
-This package requires `python` `v3.7.0` or higher. Lower versions are not tested and may present compatibility issues.
+This package requires `python` `v3.8.0` or higher. Lower versions are not tested and may present compatibility issues.
 
 ### Python packages
 + `numpy`, required for the core numerical routines.
 + `swiftsimio`, required to read data from the SWIFT HDF5 output files efficiently.
++ `swiftgalaxy`, required to bind the zoom-object with its catalogue dataset.
 + `unyt`, required for symbolic unit calculations (depends on `sympy`).
 
 Citing
