@@ -4,7 +4,7 @@ import numpy as np
 from unyt import mp, unyt_array, Msun
 from typing import Optional, Tuple
 
-from .helper_functions import astropy_to_unyt, histogram_unyt, cumsum_unyt
+from swiftzoom.properties.helper_functions import astropy_to_unyt, histogram_unyt, cumsum_unyt
 
 mean_atomic_weight_per_free_electron = 1.14
 

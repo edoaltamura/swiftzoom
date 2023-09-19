@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 """Tools for handling intermediate analysis products
 
-This package contains classes that use the `pickle` library to dump
+This package contains classes that use the ``pickle`` library to dump
 and read back into memory intermediate products of the analysis.
 
 Generally, quantities which take a long time to compute and do not
 need to be freshly calculated every time should be dumped to disk and
 read back when requires.
 
-IMPORTANT - (abstract) Class attributes are lost in pickling
-When you pickled the instance you haven't pickled the class attributes,
-just the instance attributes. So when you unpickle it you get just the
-instance attributes back.
+.. warning::
+
+    Class attributes are lost in pickling
+    When you pickled the instance you haven't pickled the class attributes,
+    just the instance attributes. So when you unpickle it you get just the
+    instance attributes back.
 """
 import os
 from warnings import warn
@@ -185,7 +187,7 @@ class Dict2HDF(CustomPickler):
         """
         for key, item in dic.items():
 
-            if isinstance(item, (np.ndarray, int, float, str, bytes)):
+            if isinstance(item, (np.ndarray, bool, int, float, str, bytes)):
 
                 try:
                     h5file[path + key] = item
@@ -196,7 +198,7 @@ class Dict2HDF(CustomPickler):
                 self._recursively_save_dict_contents_to_group(h5file, path + key + "/", item)
 
             else:
-                raise ValueError(f"Cannot save {type(item):s} type")
+                raise TypeError(f"Cannot save {type(item):s} type")
 
     def load_dict_from_hdf5(self):
         """
@@ -224,7 +226,18 @@ class Dict2HDF(CustomPickler):
         for key, item in h5file[path].items():
 
             if isinstance(item, h5py._hl.dataset.Dataset):
-                ans[key] = item[...]
+
+                out = item[...]
+                if isinstance(out, np.ndarray) and out.size == 1:
+                    if out.dtype == float:
+                        out = float(out)
+                    elif out.dtype == int:
+                        out = int(out)
+                    elif out.dtype == bool:
+                        out = bool(out)
+                    elif out.dtype == object:
+                        out = out.tolist().decode('utf-8')
+                ans[key] = out
 
             elif isinstance(item, h5py._hl.group.Group):
                 ans[key] = self._recursively_load_dict_contents_from_group(h5file, path + key + "/")

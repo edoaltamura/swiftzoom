@@ -9,7 +9,7 @@ from astropy.cosmology import Planck18_arXiv_v2 as planck18
 
 import boilerplate
 from swiftzoom.loader import GroupZoom, Dict2HDF
-from swiftzoom.processing.lagrangian_transport import EjectedGas
+from swiftzoom.properties.lagrangian_transport import EjectedGas
 
 radial_masks = [dict(rmin=0., rmax=1.), 
                 dict(rmin=1., rmax=2.), 

@@ -1,4 +1,3 @@
-from . import profiles
 from .lagrangian_transport import LagrangianTransport, EjectedGas
 from .black_holes import BlackHoles
 from .star_formation import StarFormationRate

@@ -2,14 +2,14 @@ from typing import Optional, Union, Dict, Tuple
 import warnings
 import unyt
 import numpy as np
-from swiftsimio import cosmo_array, objects
+from swiftsimio import objects
 
 from ..loading import GroupZoom
 from ..loading.constants import mean_molecular_weight, mean_atomic_weight_per_free_electron
 
-from .helper_functions import astropy_to_unyt, numpy_to_cosmo_array, cosmo_to_unyt_array
+from .helper_functions import astropy_to_unyt, numpy_to_cosmo_array
 from .spherical_overdensities import SphericalOverdensities
-from .electron_number_density import get_electron_number_density
+from swiftzoom.profiles.electron_number_density import get_electron_number_density
 
 
 def check_mask_empty_nan(func):

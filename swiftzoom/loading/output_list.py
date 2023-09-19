@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""This Python code defines a class called `OutputList` that is designed to manage lists of simulation output data and
+"""This Python code defines a class called ``OutputList`` that is designed to manage lists of simulation output data and
 assist in locating files associated with specific snapshots or redshifts. The code includes methods to match a given
 redshift with the closest one in the output list, as well as to retrieve file paths for specific snapshot numbers or
 redshifts. It also provides options to include additional information in the returned file paths, such as snapshot
@@ -29,35 +29,38 @@ class OutputList(object):
 
     Attributes:
         run_directory (str): The path to the simulation output directory.
-        number_snapshots_in_outputlist (int): The number of snapshots in the output list.
-        output_name (numpy.ndarray): An array containing the names of the simulation outputs (snapshots).
-        output_redshifts (numpy.ndarray): An array containing the redshift values corresponding to the snapshots.
+        ``number_snapshots_in_outputlist``: The number of snapshots in the output list.
+        output_name (numpy.array): An array containing the names of the simulation outputs (snapshots).
+        output_redshifts (numpy.array): An array containing the redshift values corresponding to the snapshots.
 
     Methods:
-        match_redshift(redshift_query: float) -> Tuple[float, int]:
+        match_redshift(redshift_query)
             Find the closest redshift in the output list to a given redshift_query.
 
-        files_from_snap_number(snapshot_number: int, extra_returns: bool = False) -> Union[str, Tuple[str, str, int, float]]:
+        files_from_snap_number(snapshot_number, extra_returns=False)
             Retrieve file paths associated with a specific snapshot number.
 
-        files_from_redshift(redshift_query: float, extra_returns: bool = False) -> Union[str, Tuple[str, str, int, float]]:
+        files_from_redshift(redshift_query, extra_returns=False)
             Retrieve file paths associated with a specific redshift.
 
-    Example:
-        # Initialize an OutputList instance with the simulation output directory.
-        output_list = OutputList('/path/to/simulation/output')
+    Examples:
 
-        # Find the nearest redshift to a given query redshift.
-        nearest_redshift, snapshot_number = output_list.match_redshift(0.5)
-        print(f"Nearest Redshift: {nearest_redshift}, Snapshot Number: {snapshot_number}")
+        .. code-block:: python
 
-        # Retrieve file paths for a specific snapshot number.
-        snapshot_path, catalogue_path = output_list.files_from_snap_number(10)
-        print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
+            # Initialize an OutputList instance with the simulation output directory.
+            output_list = OutputList('/path/to/simulation/output')
 
-        # Retrieve file paths for a specific redshift.
-        snapshot_path, catalogue_path = output_list.files_from_redshift(0.5)
-        print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
+            # Find the nearest redshift to a given query redshift.
+            nearest_redshift, snapshot_number = output_list.match_redshift(0.5)
+            print(f"Nearest Redshift: {nearest_redshift}, Snapshot Number: {snapshot_number}")
+
+            # Retrieve file paths for a specific snapshot number.
+            snapshot_path, catalogue_path = output_list.files_from_snap_number(10)
+            print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
+
+            # Retrieve file paths for a specific redshift.
+            snapshot_path, catalogue_path = output_list.files_from_redshift(0.5)
+            print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
     """
 
     def __init__(self, run_directory: str) -> None:
@@ -123,7 +126,7 @@ class OutputList(object):
                 Defaults to False.
 
         Returns:
-            Union[str, Tuple[str, str, int, float]]: If extra_returns is False, returns a tuple containing
+            Union[SimpleOutputType, ExtendedOutputType]: If extra_returns is False, returns a tuple containing
             the snapshot path and the catalogue path. If extra_returns is True, also includes snapshot number
             and nearest redshift.
 
@@ -163,24 +166,27 @@ class OutputList(object):
             extra_returns (bool, optional): If True, return additional information.
                 Defaults to False.
 
-        Returns: Union[Tuple[str, str, int, float], Tuple[str, str]]:: A tuple containing file paths. If
+        Returns: Union[SimpleOutputType, ExtendedOutputType]: A tuple containing file paths. If
         `extra_returns` is True, the tuple includes snapshot number and nearest redshift.
 
         Raises:
             AssertionError: If the snapshot or catalogue file is not found.
 
-        Example:
-            # Initialize an OutputList instance with the simulation output directory.
-            output_list = OutputList('/path/to/simulation/output')
+        Examples:
 
-            # Retrieve file paths for a specific redshift (without extra information).
-            snapshot_path, catalogue_path = output_list.files_from_redshift(0.5)
-            print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
+            .. code-block:: python
 
-            # Retrieve file paths for a specific redshift (with extra information). snapshot_path, catalogue_path,
-            snap_number, nearest_redshift = output_list.files_from_redshift(0.5, extra_returns=True) print(f"Snapshot
-            Path: {snapshot_path}, Catalogue Path: {catalogue_path}") print(f"Snapshot Number: {snap_number},
-            Nearest Redshift: {nearest_redshift}")
+                # Initialize an OutputList instance with the simulation output directory.
+                output_list = OutputList('/path/to/simulation/output')
+
+                # Retrieve file paths for a specific redshift (without extra information).
+                snapshot_path, catalogue_path = output_list.files_from_redshift(0.5)
+                print(f"Snapshot Path: {snapshot_path}, Catalogue Path: {catalogue_path}")
+
+                # Retrieve file paths for a specific redshift (with extra information). snapshot_path, catalogue_path,
+                snap_number, nearest_redshift = output_list.files_from_redshift(0.5, extra_returns=True) print(f"Snapshot
+                Path: {snapshot_path}, Catalogue Path: {catalogue_path}") print(f"Snapshot Number: {snap_number},
+                Nearest Redshift: {nearest_redshift}")
         """
         nearest_redshift, snap_number = self.match_redshift(redshift_query)
         snapshot_path, catalogue_path = self.files_from_snap_number(snap_number)

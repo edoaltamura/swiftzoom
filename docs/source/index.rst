@@ -6,7 +6,11 @@
 Welcome to SWIFTzoom's documentation!
 =====================================
 
-``SWIFTzoom`` is a Python library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run with SWIFT_, a parallel, multi-purpose numerical simulation software for hydrodynamic simulations in astrophysics and cosmology.
+``SWIFTzoom`` is a Python library to analyse zoom-in hydrodynamic simulations of groups and clusters of galaxies run
+with SWIFT_, a parallel, multi-purpose numerical simulation software for hydrodynamic simulations in astrophysics and
+cosmology.
+
+The
 
 .. toctree::
    :maxdepth: 2
@@ -47,6 +51,8 @@ While under development, you can acknowledge this repository by citing _paper:
 
 .. _SWIFT: http://www.swiftsim.com
 .. _paper: https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3164A/abstract
+.. _Getting started:
+
 
 Indices and tables
 ==================
