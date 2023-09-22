@@ -183,7 +183,7 @@ def production(func: Callable) -> Callable:
     Examples:
 
         .. code-block:: python
-        
+
             @production
             def expensive_production_task():
                 # Code for production use only
@@ -208,9 +208,13 @@ def development(func: Callable) -> Callable:
     If the current host is not a production server, the function is executed; otherwise, a message is printed,
     indicating that the function has been skipped.
 
-    :param func: The function to be decorated.
+    Parameters:
 
-    :return: Decorated function that executes only in development environments.
+        func (Callable): The function to be decorated.
+
+    Returns:
+
+        Callable: Decorated function that executes only in development environments.
 
 
     Examples:
